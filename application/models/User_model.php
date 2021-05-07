@@ -6,7 +6,8 @@ class User_model extends CI_Model {
 		$data = array(
 	        'name' => $data['name'],
 	        'email' => $data['email'],
-	        'password' => md5($data['password'])
+	        'password' => md5($data['password']),
+	        'role' => '2'
 		);
 		$this->db->insert('users', $data);
 		return $this->db->insert_id();

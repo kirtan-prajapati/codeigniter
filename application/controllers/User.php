@@ -21,9 +21,7 @@ class User extends MY_Controller {
 	public function store(){
 		$check = $this->userValidationCheck();
 		if($check == False){
-			$this->load->view('includes/header');
-			$this->load->view('register');
-			$this->load->view('includes/footer');
+			$this->register();
 		}else{
 			$data = $this->input->post();
 			$result = $this->User_model->store($data);
@@ -45,7 +43,8 @@ class User extends MY_Controller {
 				'name'=>$result[0]->name,
 				'email'=>$result[0]->email,
 				'login_id'=>$result[0]->id,
-				'logged_in' => true
+				'logged_in' => true,
+				'role' => $result[0]->role
 			];
 
 			$this->session->set_userdata($user);
@@ -79,5 +78,11 @@ class User extends MY_Controller {
 
 		$this->form_validation->set_rules($config);
 		return $this->form_validation->run();
+	}
+
+	public function logout(){
+		$this->session->sess_destroy();
+
+		redirect(base_url('User/login'));
 	}
 }
