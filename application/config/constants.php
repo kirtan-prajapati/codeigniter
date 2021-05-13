@@ -83,3 +83,10 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+
+defined('DEFAULT_PRODUCT_IMAGE') OR define('DEFAULT_PRODUCT_IMAGE', 'assest/default/product.jpg');
+defined('PRODUCT_IMAGE_PATH') OR define('PRODUCT_IMAGE_PATH', 'assest/uploads/products/');
+defined('JS_PATH') OR define('JS_PATH', 'assest/js/');
+defined('CSS_PATH') OR define('CSS_PATH', 'assest/css/');

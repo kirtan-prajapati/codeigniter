@@ -1,18 +1,21 @@
 
 <div class="container">
-<h1>Add Product</h1>
-<form method="POST" action="<?php echo base_url('admin/product/store'); ?>" enctype='multipart/form-data'>
+<h1><?php echo $title; ?></h1>
+<form method="POST" action="<?php echo base_url('admin/product/store'); ?>" enctype='multipart/form-data' name="productAddForm">
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" name='name' placeholder="Name">
+    <input type="text" class="form-control" id="name" name='name' placeholder="Name" value="<?php echo set_value('name'); ?>">
+    <?php echo form_error('name', '<div class="text-warning">', '</div>'); ?>
   </div>
   <div class="form-group">
     <label for="code">Code</label>
-    <input type="text" class="form-control" id="code" name='code'  placeholder="Code">
+    <input type="text" class="form-control" id="code" name='code'  placeholder="Code" value="<?php echo set_value('code'); ?>">
+    <?php echo form_error('code', '<div class="text-warning">', '</div>'); ?>
   </div>
   <div class="form-group">
     <label for="price">Price</label>
-    <input type="text" class="form-control" id="price" name="price" placeholder="Price">
+    <input type="text" class="form-control" id="price" name="price" placeholder="Price" value="<?php echo set_value('price'); ?>">
+    <?php echo form_error('price', '<div class="text-warning">', '</div>'); ?>
   </div>
   <div class="form-group">
     <label for="images">Images</label>
@@ -20,7 +23,8 @@
   </div>
   <div class="form-group">
     <label for="images">Description</label>
-    <textarea class="form-control" placeholder="Description" name="description"></textarea>
+    <textarea class="form-control" placeholder="Description" name="description"><?php echo set_value('description'); ?></textarea>
+    <?php echo form_error('description', '<div class="text-warning">', '</div>'); ?>
   </div>
 
 <hr>
@@ -63,5 +67,33 @@
     $(document).on('click','button.remove_attr', function(){
       $(this).parents('.removeAttributeSection').remove();
     });
+
+    $('form[name=productAddForm]').validate({
+      rules:{
+        name: {
+          required:true,
+          minlength: 3
+        },
+        code: {
+          required:true,
+          minlength: 6,
+          maxlength: 6
+        },
+        price: "required",
+      },
+      messages:{
+        name:{
+          required:"Product name is required.",
+        },
+        code: {
+          required:"Product code is required.",
+          minlength:"The Product code field must be exactly 6 characters in length.",
+          maxlength:"The Product code field must be exactly 6 characters in length.",
+        },
+        price: "Product price is required."
+      }
+    });
+
+
   });
 </script>
