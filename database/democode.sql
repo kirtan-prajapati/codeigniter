@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2021 at 08:21 AM
+-- Generation Time: May 14, 2021 at 08:58 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.2.25
 
@@ -38,10 +38,15 @@ CREATE TABLE `attribute` (
 --
 
 INSERT INTO `attribute` (`id`, `name`, `value`) VALUES
-(7, 'color', 'blue'),
-(8, 'color', 'golden'),
-(9, 'size', 'small'),
-(10, 'size', 'large');
+(10, 'size', 'large'),
+(11, '', ''),
+(12, '', ''),
+(13, 'color', 'red'),
+(14, 'color', 'red'),
+(15, 'size', 'large'),
+(16, 'color', 'Blue'),
+(17, 'size', 'small'),
+(23, 'brand', 'LG');
 
 -- --------------------------------------------------------
 
@@ -62,7 +67,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `code`, `price`, `description`) VALUES
-(54, 'Sport watch', 'DFD343', '1268', 'TEST');
+(54, 'Watch', 'DFD343', '126.00', 'TEST'),
+(55, '', '', '', ''),
+(56, 'sports 1', '333433', '123.21', 'tesstt'),
+(57, 'sports', '343343', '343.00', 'test'),
+(58, 'sports 132', '333433', '123.21', 'tesstt');
 
 -- --------------------------------------------------------
 
@@ -81,10 +90,14 @@ CREATE TABLE `product_attribute` (
 --
 
 INSERT INTO `product_attribute` (`id`, `product_id`, `attribute_id`) VALUES
-(1, 54, 7),
-(2, 54, 8),
-(3, 54, 9),
-(4, 54, 10);
+(5, 55, 11),
+(6, 55, 12),
+(7, 56, 13),
+(8, 58, 14),
+(9, 58, 15),
+(10, 54, 16),
+(11, 54, 17),
+(15, 54, 23);
 
 -- --------------------------------------------------------
 
@@ -103,8 +116,8 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image`) VALUES
-(10, 54, 'Screenshot_(5)1.png'),
-(11, 54, 'Screenshot_(6)1.png');
+(12, 56, 'Screenshot_(2).png'),
+(22, 54, 'Screenshot_(4).png');
 
 -- --------------------------------------------------------
 
@@ -170,25 +183,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attribute`
 --
 ALTER TABLE `attribute`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `product_attribute`
 --
 ALTER TABLE `product_attribute`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`

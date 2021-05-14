@@ -3,7 +3,10 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(CSS_PATH.'custom.css'); ?>">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
@@ -24,6 +27,9 @@
         <a class="nav-link" href="#">Pricing</a>
       </li>
     </ul>
+    <span class="navbar-text">
+      <a href="#" id="pCart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">0</span></a>
+    </span>
     <?php if(!empty(($this->session->userdata('logged_in')))){ ?>
     <span class="navbar-text">
       <a href="<?php echo base_url('User/logout') ?>" class="btn btn-primary">Logout</a>
@@ -31,3 +37,5 @@
     <?php } ?>
   </div>
 </nav>
+
+<div class="shopping-container"></div>

@@ -28,8 +28,11 @@ class Product_model extends CI_Model {
 	}
 
 	public function product($params = []){
-		$this->db->select('*');
-		$this->db->where('id',$params['id']);
+		$this->db->select('products.*,product_images.image');
+		$this->db->join('product_images', 'product_images.product_id = products.id', 'left');
+		$this->db->group_by("products.id");
+		$this->db->order_by('products.id', 'DESC');
+		$this->db->where('products.id',$params['id']);
 		$query = $this->db->get('products');
 		return $query->row_array();
 	}
