@@ -61,12 +61,14 @@ class Product extends MY_Controller {
 
     public function store(){
         $input = $this->input->post();
+        $response = ['status'=>'error','message'=>'Something went wrong!'];
         $isValid = $this->productValidationCheck();
         if(!$isValid){
             return $this->add();
         }
         $product_id = $this->Product_model->store($input);
         if($product_id){
+            $response = ['status'=>'success','message'=>'Product added successfully!'];
             $images = $_FILES['images'];
             $this->do_upload_multiple_files($images,$product_id);
 
@@ -83,13 +85,14 @@ class Product extends MY_Controller {
                 $proAttr['attribute_id'] = $attrId;
                 $this->Product_attribute_model->store($proAttr);
             }
-
+            $this->session->set_flashdata('messageAlert', $response);
             redirect(base_url('admin/product'));
         }
     }
 
     public function update(){
         $input = $this->input->post();
+        $response = ['status'=>'error','message'=>'Something went wrong!'];
         $product_id = $input['id'];
         $isValid = $this->productValidationCheck();
         if(!$isValid){
@@ -97,6 +100,7 @@ class Product extends MY_Controller {
         }
         $isProUpdated = $this->Product_model->store($input, $product_id);
         if($isProUpdated){
+            $response = ['status'=>'success','message'=>'Product updated successfully!'];
             $images = $_FILES['images'];
             $this->do_upload_multiple_files($images,$product_id);
 
@@ -119,7 +123,7 @@ class Product extends MY_Controller {
                 }
             }
         }
-
+        $this->session->set_flashdata('messageAlert', $response);
         redirect(base_url('admin/product'));
     }
 
@@ -238,5 +242,18 @@ class Product extends MY_Controller {
         }else{
             echo json_encode(['status'=>'error','message'=>'Something went wrong!']);
         }
+    }
+
+    public function delete($id){
+        $id = base64_decode($id);
+        $isDeleted = $this->Product_model->destroy($id);
+        if($isDeleted){
+            $response = ['status'=>'success','message'=>'Product deleted successfully!'];
+        }else{
+            $response = ['status'=>'error','message'=>'Something went wrong!'];
+        }
+
+        $this->session->set_flashdata('messageAlert', $response);
+        redirect(base_url('admin/product'));
     }
 }

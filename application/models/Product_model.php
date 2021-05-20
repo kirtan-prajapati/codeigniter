@@ -36,4 +36,8 @@ class Product_model extends CI_Model {
 		$query = $this->db->get('products');
 		return $query->row_array();
 	}
+
+	public function destroy($id){
+		return $this->db->delete('products', array('id' => $id));
+	}
 }

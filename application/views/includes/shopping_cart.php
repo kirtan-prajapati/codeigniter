@@ -12,6 +12,7 @@
   <ul class="shopping-cart-items">
     <?php foreach ($cartItems as $key => $item) { ?>
       <li class="clearfix">
+        <a href="javascript:void(0);" class="removeCartItem" data-rowid="<?php echo $item['rowid']; ?>" data-action="<?php echo base_url("home/removeFromCart"); ?>"><i class="fa fa-close"></i></a>
         <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['name']; ?>" />
         <span class="item-name"><?php echo $item['name']; ?></span>
         <span class="item-price">$<?php echo $this->cart->format_number($item['price']); ?></span>

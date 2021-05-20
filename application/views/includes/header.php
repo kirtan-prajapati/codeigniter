@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(CSS_PATH.'custom.css'); ?>">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="<?php echo base_url(JS_PATH.'custom.js'); ?>"></script>
 </head>
 <body>
 

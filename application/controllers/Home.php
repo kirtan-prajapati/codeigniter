@@ -12,6 +12,12 @@ class Home extends MY_Controller {
 
 	public function index(){
         $data['productList'] = $this->Product_model->getAllProducts();
+        $data['cartItem'] = [];
+        $cartItems = $this->cart->contents();
+        foreach ($cartItems as $item) {
+            $data['cartItem'][$item['id']]['rowid'] = $item['rowid'];
+            $data['cartItem'][$item['id']]['qty'] = $item['qty'];
+        }
         $this->load->view('includes/header');
 		$this->load->view('index', $data);
         $this->load->view('includes/footer');
@@ -20,6 +26,7 @@ class Home extends MY_Controller {
     public function addCart(){
         $product_id = $this->input->post('product_id');
         $quantity = $this->input->post('quantity');
+        $rowid = $this->input->post('rowid');
         $product = $this->Product_model->product(['id'=>$product_id]);
 
         $imageURL = base_url(DEFAULT_PRODUCT_IMAGE);
@@ -27,17 +34,39 @@ class Home extends MY_Controller {
             $imageURL = base_url(PRODUCT_IMAGE_PATH.$product['image']);
         }
         
-        $data = array(
-            'id'      => $product['id'],
-            'qty'     => $quantity,
-            'price'   => $product['price'],
-            'name'    => $product['name'],
-            'image'    => $imageURL
-            //'options' => array('Size' => 'L', 'Color' => 'Red')
-        );
+        if(!empty($rowid)){
+            $data = array(
+                'rowid' => $rowid,
+                'qty'   => $quantity
+            );
 
-        $this->cart->insert($data);
-        echo json_encode(['status'=>'success', 'message'=>'Product added successfully in your cart!']);
+            $this->cart->update($data);
+            $message = 'Product quantity update successfully in your cart!';
+        }else{
+            $data = array(
+                'id'      => $product['id'],
+                'qty'     => $quantity,
+                'price'   => $product['price'],
+                'name'    => $product['name'],
+                'image'    => $imageURL
+                //'options' => array('Size' => 'L', 'Color' => 'Red')
+            );
+
+            $this->cart->insert($data);
+            $message = 'Product added successfully in your cart!';
+        }
+        echo json_encode(['status'=>'success', 'message'=> $message]);
+    }
+
+    public function removeFromCart(){
+        $rowid = $this->input->post('rowid');
+        $result = $this->cart->remove($rowid);
+        $response = ['status'=>'error', 'message'=> 'Please try again!'];
+        if($result){
+            $response = ['status'=>'success', 'message'=> 'Removed successfully!'];
+        }
+        echo json_encode($response);
+        die();
     }
 
     public function updateShoppingCartMenu(){
